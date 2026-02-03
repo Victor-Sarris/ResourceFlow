@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-const Connection = require("../database/database.js");
+const connection = require("../database/database.js");
 
 const User = connection.define("user", {
   nome: {
@@ -10,15 +10,23 @@ const User = connection.define("user", {
     type: Sequelize.STRING(50),
     allowNull: false,
   },
+  password: {
+    type: Sequelize.STRING(50),
+    allowNull: false,
+  },
   telefone: {
     type: Sequelize.STRING(11),
     allowNull: false,
   },
-  cargo: {
-    type: Sequelize.STRING(13),
+  cpf: {
+    type: Sequelize.STRING(14),
     allowNull: false,
+  },
+  cargo: {
+    type: Sequelize.STRING(20),
+    allowNull: true,
+    defaultValue: "Estudante",
   },
 });
 
-User.sync();
 module.exports = User;

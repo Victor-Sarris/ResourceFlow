@@ -1,4 +1,4 @@
-const Connection = require("../database/database.js");
+const connection = require("../database/database.js");
 require("../models/user.models.js");
 
-Connection.sync();
+connection.sync();
