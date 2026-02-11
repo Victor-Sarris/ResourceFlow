@@ -56,7 +56,7 @@ function Profile() {
               <p className="text-slate-400">{formData.role}</p>
             </div>
           </div>
-          <div className="absolute bottom-4 right-4 md:bottom-[-60px] md:right-0">
+          <div className="absolute bottom-4 right-4 md:bottom-15 md:right-0">
             {isEditing ? (
               <button
                 onClick={handleSave}

@@ -77,7 +77,7 @@ function Login() {
               {/* botao de retorno */}
               <button
                 title="Voltar para a página anterior"
-                className="flex gap-5 cursor-pointer ml-[-400px] hover:text-purple-400 transition-all duration-300"
+                className="flex gap-5 cursor-pointer ml-100 hover:text-purple-400 transition-all duration-300"
                 onClick={handleReturnPage}
               >
                 <FaArrowLeft size={24} />
@@ -88,23 +88,23 @@ function Login() {
                 title="Esse é meu gatinho :)"
                 className="h-150 w-150 object-contain"
               />
-              <h3 className="font-bold m-10 mt-[-70px]">
+              <h3 className="font-bold m-10 mt-17.5">
                 Como aquele velho ditado... Falta um pouquinho pra daqui a
                 pouco.
               </h3>
             </div>
             {/* Conteudo principal */}
-            <div className="bg-white rounded-[10px] rounded-tl-[0px] rounded-bl-[0px] w-215 h-190">
+            <div className="bg-white rounded-[10px] rounded-tl-none rounded-bl-none w-215 h-190">
               <h2 className="text-xl font-bold text-gray-800 text-center  mt-20">
                 Para continuar, coloque seus dados a baixo
               </h2>
               {/* botoes de login */}
-              <div className="m-20 flex gap-10 justify-center mb-[-15px]">
-                <button className="text-black border-2 border-black p-3 w-70 rounded-[12px] flex gap-3 mb-10 cursor-pointer transition-all duration-300 hover:bg-black/10">
+              <div className="m-20 flex gap-10 justify-center mb-3.75">
+                <button className="text-black border-2 border-black p-3 w-70 rounded-xl flex gap-3 mb-10 cursor-pointer transition-all duration-300 hover:bg-black/10">
                   <FcGoogle size={24} />
                   Fazer login com o Google
                 </button>
-                <button className="text-black border-2 border-black p-3 w-70 rounded-[12px] flex gap-3 mb-10 cursor-pointer transition-all duration-300 hover:bg-black/10">
+                <button className="text-black border-2 border-black p-3 w-70 rounded-xl flex gap-3 mb-10 cursor-pointer transition-all duration-300 hover:bg-black/10">
                   <FaGithub size={24} />
                   Fazer login com o GitHub
                 </button>

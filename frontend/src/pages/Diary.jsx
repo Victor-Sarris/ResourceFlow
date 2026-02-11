@@ -88,7 +88,7 @@ function Diary() {
               {dailyEvents.map((event) => (
                 <div key={event.id} className="relative pl-8 group">
                   <div
-                    className={`absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-slate-950 border-2 ${event.color} group-hover:scale-125 transition-transform`}
+                    className={`absolute -left-2.25 top-0 w-4 h-4 rounded-full bg-slate-950 border-2 ${event.color} group-hover:scale-125 transition-transform`}
                   ></div>
 
                   <div className="bg-slate-900/50 hover:bg-slate-900 border border-slate-800 p-5 rounded-2xl transition-all hover:shadow-xl hover:translate-x-1 cursor-pointer">
@@ -119,7 +119,7 @@ function Diary() {
               ))}
 
               <div className="relative pl-8">
-                <div className="absolute -left-[9px] top-2 w-4 h-4 rounded-full bg-slate-800"></div>
+                <div className="absolute -left-2.25 top-2 w-4 h-4 rounded-full bg-slate-800"></div>
                 <button className="w-full py-4 border-2 border-dashed border-slate-800 rounded-2xl text-slate-500 hover:text-blue-400 hover:border-blue-500/50 hover:bg-blue-500/5 transition-all flex items-center justify-center gap-2 font-medium">
                   <IoAdd size={20} />
                   Adicionar novo evento para hoje
@@ -143,7 +143,7 @@ function Diary() {
               </div>
 
               <textarea
-                className="w-full h-[400px] bg-slate-950 rounded-xl p-4 text-slate-300 resize-none outline-none focus:ring-2 focus:ring-blue-500/50 border border-slate-800"
+                className="w-full h-100 bg-slate-950 rounded-xl p-4 text-slate-300 resize-none outline-none focus:ring-2 focus:ring-blue-500/50 border border-slate-800"
                 placeholder="Escreva lembretes, observações ou ocorrências importantes deste dia..."
                 value={dailyNote}
                 onChange={(e) => setDailyNote(e.target.value)}
