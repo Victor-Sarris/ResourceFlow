@@ -1,18 +1,13 @@
 import Logo from "../assets/Resource-Flow.png";
 import { useNavigate } from "react-router-dom";
 import React, { useRef, useState } from "react";
-
-// Importacoes de particulas
 import ParticlesBackground from "../components/Particles.jsx";
-
-// Importacoes de icones da bibioteca
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 
 function Cadastro() {
-  // Funcao para navegação entre páginas
   const navigate = useNavigate();
   const handleReturnPage = () => {
     navigate("/");
@@ -48,8 +43,6 @@ function Cadastro() {
       alert("Erro de conexão com o servidor.");
     }
   };
-
-  // === fim comunicacao do back com front ===
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -240,7 +233,7 @@ function Cadastro() {
                   </button>
                 </form>
               </div>
-              <p className="text-[12px] text-black mt-[-10px]">
+              <p className="text-[12px] text-black mt-2.5">
                 Resource Flow 2025 |🔱🪽
               </p>
             </div>
