@@ -4,6 +4,8 @@ module.exports = (app) => {
 
   // Rota para criar um novo usuário
   router.post("/", users.create);
+  // Rota para realizar o login
+  router.post("/login", users.login);
 
   // Define a URL base: http://localhost:3000/api/users
   app.use("/api/users", router);
