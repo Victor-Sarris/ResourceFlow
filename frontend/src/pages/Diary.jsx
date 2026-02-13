@@ -9,6 +9,7 @@ import {
   IoAdd,
   IoSaveOutline,
 } from "react-icons/io5";
+import AddEventModal from "../components/AddEventModal";
 
 function Diary() {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -120,10 +121,7 @@ function Diary() {
 
               <div className="relative pl-8">
                 <div className="absolute -left-2.25 top-2 w-4 h-4 rounded-full bg-slate-800"></div>
-                <button className="w-full py-4 border-2 border-dashed border-slate-800 rounded-2xl text-slate-500 hover:text-blue-400 hover:border-blue-500/50 hover:bg-blue-500/5 transition-all flex items-center justify-center gap-2 font-medium">
-                  <IoAdd size={20} />
-                  Adicionar novo evento para hoje
-                </button>
+                <AddEventModal />
               </div>
             </div>
           </div>
