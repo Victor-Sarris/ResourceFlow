@@ -27,6 +27,14 @@ const User = connection.define("user", {
     allowNull: true,
     defaultValue: "Estudante",
   },
+  bio: {
+    type: Sequelize.STRING(20),
+    allowNull: true,
+    defaultValue: "Usuário do Resource Flow.",
+  },
+  // avatar: {
+  //   type: Image
+  // }
 });
 
 module.exports = User;

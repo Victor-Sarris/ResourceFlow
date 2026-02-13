@@ -1,4 +1,6 @@
+require("dotenv").config();
 const User = require("../models/user.models.js");
+const jwt = require("jsonwebtoken");
 
 exports.create = async (req, res) => {
   try {
@@ -27,34 +29,67 @@ exports.create = async (req, res) => {
 };
 
 // Rota de Login
-exports.login =
-  ("/Login",
-  async (req, res) => {
-    try {
-      const { email, password } = req.body;
+exports.login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
 
-      const user = await User.findOne({ where: { email: email } });
+    const user = await User.findOne({ where: { email: email } });
 
-      if (!user) {
-        return res.status(404).send({ message: "Senha inválida" });
-      }
-
-      if (user.password !== password) {
-        return res.status(401).send({ message: "Senha inválida." });
-      }
-
-      res.send({
-        message: "Login realizado com sucesso.",
-        user: {
-          id: user.id,
-          nome: user.nome,
-          email: user.email,
-          cargo: user.cargo,
-        },
-      });
-    } catch (err) {
-      res.status(505).send({
-        message: err.message || "Erro ao realizar Login, tente novamente.",
-      });
+    if (!user) {
+      return res.status(404).send({ message: "Usuário não encontrado." });
     }
-  });
+
+    if (user.password !== password) {
+      return res.status(401).send({ message: "Senha inválida." });
+    }
+
+    // Criação do Token
+    const token = jwt.sign(
+      { id: user.id, nome: user.nome, email: user.email, cargo: user.cargo },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" },
+    );
+
+    res.status(200).json({
+      message: "Login realizado com sucesso.",
+      token: token,
+      user: {
+        id: user.id,
+        nome: user.nome,
+        email: user.email,
+        cargo: user.cargo,
+      },
+    });
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "Erro ao realizar Login.",
+    });
+  }
+};
+
+// Buscar usuário por id
+exports.findOne = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const user = await User.findByPk(id);
+
+    if (!user) {
+      return res.status(400).send({ message: "Usuário não encontrado " });
+    }
+
+    res.send({
+      id: user.id,
+      nome: user.nome,
+      email: user.email,
+      telefone: user.telefone,
+      cpf: user.cpf,
+      cargo: user.cargo,
+      bio: user.bio,
+      avatar: user.avatar,
+    });
+  } catch (err) {
+    return res
+      .status(500)
+      .send({ message: "Erro ao buscar usuário com id=" + id });
+  }
+};

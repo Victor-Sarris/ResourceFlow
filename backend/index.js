@@ -1,9 +1,10 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const db = require("./models/user.models.js");
+const db = require("./src/models/user.models.js");
+require("dotenv").config();
 
-const connection = require("./database/database.js");
+const connection = require("./src/database/database.js");
 connection
   .sync()
   .then(() => console.log("Banco de dados sincronizado."))
@@ -18,7 +19,7 @@ app.get("/", (req, res) => {
   res.json({ message: "Bem-vindo ao Backend do ResourceFlow." });
 });
 
-require("./routes/user.routes.js")(app);
+require("./src/routes/user.routes.js")(app);
 
 // Porta do servidor
 const PORT = process.env.PORT || 3000;
