@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 import {
   IoSave,
@@ -13,25 +13,44 @@ function Profile() {
   const [isEditing, setIsEditing] = useState(false);
 
   const [formData, setFormData] = useState({
-    name: "Victor Sarrís",
-    email: "devvictorsarris@gmail.com",
-    role: "Administrador",
-    phone: "(89) 99407-2096",
-    bio: "Desenvolvedor Full Stack apaixonado por gatos e React.",
+    name: "",
+    email: "",
+    role: "",
+    phone: "",
+    bio: "",
     avatar: "https://github.com/Victor-Sarris.png",
   });
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+
+    if (storedUser) {
+      const userObj = JSON.parse(storedUser);
+      const userId = userObj.id;
+
+      fetch(`http://localhost:3000/api/users/${userId}`)
+        .then((response) => {
+          if (!response.ok) throw new Error("Erro ao buscar perfil");
+          return response.json();
+        })
+        .then((data) => {
+          setFormData((prev) => ({
+            ...prev,
+            name: data.nome,
+            email: data.email,
+            role: data.cargo || "Estudante",
+            phone: data.telefone,
+          }));
+        })
+        .catch((error) => console.error("Erro:", error));
+    }
+  }, []);
 
   // Função para lidar com mudanças nos inputs
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
-
-  // // Função de Salvar
-  // const handleSave = () => {
-  //     setIsEditing(false);
-  //     alert("Dados salvos com sucesso!");
-  // };
 
   return (
     <div className="flex min-h-screen bg-slate-950">

@@ -49,6 +49,9 @@ function Login() {
       const data = await response.json();
 
       if (response.ok) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+
         alert("Login realizado com sucesso!");
         navigate("/dashboard");
       } else {
