@@ -12,16 +12,56 @@ import { FaArrowLeft } from "react-icons/fa";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 
 function Login() {
-
-  // Funcao para navegação entre páginas
   const navigate = useNavigate();
-    const handleReturnPage = () => {
-        navigate('/');
-    };
+  const handleReturnPage = () => {
+    navigate("/");
+  };
 
   // funcao para o "exibir senha"
   const passwordRef = useRef(null);
   const [showPassword, setShowPassword] = useState(false);
+
+  const [formData, setformData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setformData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch("http://localhost:3000/api/users/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+
+        alert("Login realizado com sucesso!");
+        navigate("/dashboard");
+      } else {
+        alert(data.message || "Email ou senha incorretos.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Erro de conexão com o servidor");
+    }
+  };
 
   return (
     <div>
@@ -37,11 +77,10 @@ function Login() {
           <div className="flex">
             {/* Conteudo secundario */}
             <div className="flex flex-col w-max items-center justify-center">
-
-                {/* botao de retorno */}
+              {/* botao de retorno */}
               <button
                 title="Voltar para a página anterior"
-                className="flex gap-5 cursor-pointer ml-[-400px] hover:text-purple-400 transition-all duration-300"
+                className="flex gap-5 cursor-pointer ml-100 hover:text-purple-400 transition-all duration-300"
                 onClick={handleReturnPage}
               >
                 <FaArrowLeft size={24} />
@@ -52,23 +91,23 @@ function Login() {
                 title="Esse é meu gatinho :)"
                 className="h-150 w-150 object-contain"
               />
-              <h3 className="font-bold m-10 mt-[-70px]">
+              <h3 className="font-bold m-10 mt-17.5">
                 Como aquele velho ditado... Falta um pouquinho pra daqui a
                 pouco.
               </h3>
             </div>
             {/* Conteudo principal */}
-            <div className="bg-white rounded-[10px] rounded-tl-[0px] rounded-bl-[0px] w-215 h-190">
+            <div className="bg-white rounded-[10px] rounded-tl-none rounded-bl-none w-215 h-190">
               <h2 className="text-xl font-bold text-gray-800 text-center  mt-20">
                 Para continuar, coloque seus dados a baixo
               </h2>
               {/* botoes de login */}
-              <div className="m-20 flex gap-10 justify-center mb-[-15px]">
-                <button className="text-black border-2 border-black p-3 w-70 rounded-[12px] flex gap-3 mb-10 cursor-pointer transition-all duration-300 hover:bg-black/10">
+              <div className="m-20 flex gap-10 justify-center mb-3.75">
+                <button className="text-black border-2 border-black p-3 w-70 rounded-xl flex gap-3 mb-10 cursor-pointer transition-all duration-300 hover:bg-black/10">
                   <FcGoogle size={24} />
                   Fazer login com o Google
                 </button>
-                <button className="text-black border-2 border-black p-3 w-70 rounded-[12px] flex gap-3 mb-10 cursor-pointer transition-all duration-300 hover:bg-black/10">
+                <button className="text-black border-2 border-black p-3 w-70 rounded-xl flex gap-3 mb-10 cursor-pointer transition-all duration-300 hover:bg-black/10">
                   <FaGithub size={24} />
                   Fazer login com o GitHub
                 </button>
@@ -77,13 +116,15 @@ function Login() {
               <h3 className="text-black font-bold">Ou</h3>
               {/* Campos de registro */}
               <div className="flex flex-col h-100% m-10">
-                <form action="" className="flex flex-col gap-7">
+                <form onSubmit={handleSubmit} className="flex flex-col gap-7">
                   <input
                     type="email"
                     name="email"
                     id="email"
                     placeholder="Email"
                     title="Insira seu Email aqui"
+                    value={formData.email}
+                    onChange={handleChange}
                     className="text-black p-3 border-2 border-b-slate-700 rounded-2xl"
                   />
                   {/* Campo de senha com botão de "ver senha" */}
@@ -95,6 +136,8 @@ function Login() {
                       id="password"
                       placeholder="Senha"
                       title="Insira sua senha aqui"
+                      value={formData.password}
+                      onChange={handleChange}
                       className="text-black p-3  border-2 border-b-slate-700 rounded-2xl w-full pr-12"
                     />
                     <button
@@ -140,13 +183,16 @@ function Login() {
                       )}
                     </button>
                   </div>
+                  <button
+                    type="submit"
+                    className="bg-purple-500 text-white p-4 w-50 m-10 cursor-pointer border-2 rounded-[7px] border-transparent hover:bg-purple-400 transition-all duration-300"
+                  >
+                    Entrar
+                  </button>
                 </form>
               </div>
 
-              <button className="bg-purple-500 text-white p-4 w-50 m-10 cursor-pointer border-2 rounded-[7px] border-transparent hover:bg-purple-400 transition-all duration-300">
-                Entrar
-              </button>
-              <p className="text-[12px] text-black mt-[90px]">
+              <p className="text-[12px] text-black mt-22.5">
                 Resource Flow 2025 |🔱🪽
               </p>
             </div>

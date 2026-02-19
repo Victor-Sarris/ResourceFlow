@@ -35,7 +35,7 @@ function Support() {
       <Sidebar />
 
       <main className="flex-1 lg:ml-64 p-8 transition-all duration-300">
-        <section className="bg-gradient-to-r from-blue-900 to-purple-600 text-white py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden rounded-2xl shadow-2xl">
+        <section className="bg-linear-to-r from-blue-900 to-purple-600 text-white py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden rounded-2xl shadow-2xl">
           <div className="absolute inset-0 opacity-20 pointer-events-none">
             <div className="absolute top-10 left-10 w-40 h-40 bg-purple-400 rounded-full blur-3xl"></div>
             <div className="absolute bottom-10 right-10 w-60 h-60 bg-indigo-500 rounded-full blur-3xl"></div>
@@ -90,7 +90,7 @@ function Support() {
           <button
             onClick={toggleChatbot}
             aria-label="Abrir suporte por chat"
-            className="fixed bottom-8 right-8 w-16 h-16 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-full flex items-center justify-center cursor-pointer shadow-2xl hover:shadow-purple-500/50 transform hover:scale-110 transition-all duration-300 z-50 group"
+            className="fixed bottom-8 right-8 w-16 h-16 bg-linear-to-r from-purple-600 to-indigo-600 text-white rounded-full flex items-center justify-center cursor-pointer shadow-2xl hover:shadow-purple-500/50 transform hover:scale-110 transition-all duration-300 z-50 group"
           >
             <IoChatbubbles className="text-2xl group-hover:rotate-12 transition-transform" />
             <div className="absolute top-3 right-3 w-3 h-3 bg-green-400 rounded-full border-2 border-purple-600"></div>
@@ -99,7 +99,7 @@ function Support() {
         {isChatbotOpen && (
           <div className="fixed bottom-24 right-8 w-80 md:w-96 bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl z-50 flex flex-col overflow-hidden animate-fade-in-up">
             {/* Header do Chat */}
-            <div className="bg-gradient-to-r from-purple-800 to-indigo-800 p-4 flex justify-between items-center">
+            <div className="bg-linear-to-r from-purple-800 to-indigo-800 p-4 flex justify-between items-center">
               <h3 className="text-white font-bold flex items-center gap-2">
                 <IoChatbubbles /> Suporte Resource Flow
               </h3>
